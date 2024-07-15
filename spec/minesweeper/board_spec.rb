@@ -1,17 +1,12 @@
 require "spec_helper"
 
 require "minesweeper/board"
-require "minesweeper/ascii_renderer"
 
 RSpec.describe Minesweeper::Board do
   let(:full_3_2_board) { Enumerator::Product.new(0..2, 0..1).map { coord(_1, _2) } }
 
   def render_for(width, height, mines)
-    board = described_class.new(width, height, mines)
-    renderer = Minesweeper::AsciiRenderer.new(board)
-    string_io = StringIO.new
-    renderer.render(string_io)
-    string_io.string
+    ascii_render(described_class.new(width, height, mines))
   end
 
   it "calculates correctly when it's all mines" do
@@ -56,5 +51,9 @@ RSpec.describe Minesweeper::Board do
       113*5*3_
       __113*2_
     BOARD
+  end
+
+  it "can generate a random board" do
+    expect { described_class.generate_random(3, 2, 1) }.to_not raise_error
   end
 end
