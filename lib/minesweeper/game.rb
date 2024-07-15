@@ -5,7 +5,7 @@ module Minesweeper
     CELL_WITH_NO_ADJACENT_MINES = Board::Empty.new(0)
 
     def initialize(board)
-      @cells = Array.new(board.height * board.width, nil)
+      @cells = Array.new(board.height * board.width)
       @board = board
     end
 
@@ -15,7 +15,7 @@ module Minesweeper
 
     def reveal(coordinate)
       index = cell_index(coordinate)
-      return @cells[index] if @cells[index]
+      return :play if @cells[index]
 
       (@cells[index] = @board.cell(coordinate)).tap do |cell|
         return :lose if cell.is_a?(Board::Mine)

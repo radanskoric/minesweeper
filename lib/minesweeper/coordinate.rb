@@ -1,6 +1,6 @@
 module Minesweeper
   Coordinate = Data.define(:x, :y) do
-    NEIGHBOURS = ([-1, 0, 1].yield_self { |deltas| deltas.product(deltas) } - [[0, 0]]).map { |x, y| self.new(x, y) }
+    NEIGHBOURS = (Enumerator.product([-1, 0, 1], [-1, 0, 1]).to_a - [0, 0]).map { |x, y| self.new(x, y) }
 
     def neighbour?(other)
       [(self.x - other.x).abs, (self.y - other.y).abs].max <= 1

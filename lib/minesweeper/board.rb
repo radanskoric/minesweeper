@@ -6,7 +6,7 @@ module Minesweeper
     Empty = Data.define(:neighbour_mines)
 
     def self.generate_random(width, height, mines_count)
-      full_board = Enumerator::Product.new(width.times, height.times).map { |x, y| Coordinate.new(x, y) }
+      full_board = Enumerator.product(width.times, height.times).map { |x, y| Coordinate.new(x, y) }
       self.new(width, height, full_board.sample(mines_count))
     end
 

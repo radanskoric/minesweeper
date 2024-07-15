@@ -1,7 +1,7 @@
 require "readline"
 
-require_relative "lib/minesweeper/ascii_renderer"
-require_relative "lib/minesweeper/game"
+require_relative "minesweeper/ascii_renderer"
+require_relative "minesweeper/game"
 
 module Minesweeper
   module_function def play(...)
